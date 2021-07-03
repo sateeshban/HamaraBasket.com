@@ -42,13 +42,13 @@ namespace HamaraBasket.Com.Services
             var ItemTypesResult = dataRetrieverItemTypes.Retriever();
 
 
-            Sell_by_date_has_passed(ItemsResult, ItemTypesResult);
+            Quality_Rule_Engine(ItemsResult, ItemTypesResult);
 
 
             return ItemsResult;
         }
 
-        private void Sell_by_date_has_passed(List<Items> itemsResult, List<ItemTypes> itemTypesResult)
+        private void Quality_Rule_Engine(List<Items> itemsResult, List<ItemTypes> itemTypesResult)
         {
             itemsResult.ForEach(itm =>
             {
