@@ -28,22 +28,29 @@ namespace HamaraBasket.Com.Services
         }
         public List<Items> RuleEngine()
         {
-            if (dataRetrieverItems == null)
+            List<Items> ItemsResult;
+            try
             {
-                throw new ArgumentNullException("[QualityRuleEngine][RuleEngine] dataRetrieverItems Should not be null");
+                if (dataRetrieverItems == null)
+                {
+                    throw new ArgumentNullException("[QualityRuleEngine][RuleEngine] dataRetrieverItems Should not be null");
+                }
+                if (dataRetrieverItemTypes == null)
+                {
+                    throw new ArgumentNullException("[QualityRuleEngine][RuleEngine] dataRetrieverItemTypes Should not be null");
+                }
+
+
+                ItemsResult = dataRetrieverItems.Retriever();
+                var ItemTypesResult = dataRetrieverItemTypes.Retriever();
+
+
+                Quality_Rule_Engine(ItemsResult, ItemTypesResult);
             }
-            if (dataRetrieverItemTypes == null)
+            catch (Exception ex)
             {
-                throw new ArgumentNullException("[QualityRuleEngine][RuleEngine] dataRetrieverItemTypes Should not be null");
+                throw ex;
             }
-
-
-            var ItemsResult = dataRetrieverItems.Retriever();
-            var ItemTypesResult = dataRetrieverItemTypes.Retriever();
-
-
-            Quality_Rule_Engine(ItemsResult, ItemTypesResult);
-
 
             return ItemsResult;
         }
